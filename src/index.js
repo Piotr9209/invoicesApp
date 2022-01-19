@@ -4,14 +4,16 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./features/store/store";
 import { ShowInvoices } from "./components/showInvoices/ShowInvoices";
-import { InovicesMenu } from "./components/inovicesMenu/InovicesMenu";
+import { InvoicesMenu } from "./components/invoicesMenu/invoicesMenu";
+import { InvoicesNav } from "./components/invoicesNav/InvoicesNav.jsx";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
+      <InvoicesNav />
+      <InvoicesMenu />
       <ShowInvoices />
-      <InovicesMenu />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

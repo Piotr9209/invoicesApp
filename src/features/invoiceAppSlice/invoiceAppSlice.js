@@ -5,8 +5,9 @@ const initialState = {
   loading: true,
   failed: false,
   success: false,
+  newInvoice: false,
 };
-const url = "http://localhost:8000/invoiceData";
+const url = "http://localhost:8000/";
 
 const checkForError = (response) => {
   if (!response.ok) throw Error("ERROR" + response.statusText);
@@ -15,8 +16,8 @@ const checkForError = (response) => {
 
 export const getInvoiceData = createAsyncThunk(
   "invoice/getInvoiceData",
-  async () => {
-    return await fetch(url)
+  async (id) => {
+    return await fetch(url + id)
       .then(checkForError)
       .then((data) => {
         return data;
@@ -30,7 +31,11 @@ export const getInvoiceData = createAsyncThunk(
 export const invoiceAppSlice = createSlice({
   name: "invoiceAppSelected",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleNewInvoice: (state) => {
+      state.newInvoice = !state.newInvoice;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getInvoiceData.pending, (state) => {
       state.failed = false;

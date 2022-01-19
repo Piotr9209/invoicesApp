@@ -7,12 +7,21 @@ export const ShowInvoices = () => {
   const invoiceData = useSelector((state) => state.invoiceData.invoiceData);
 
   useEffect(() => {
-    dispatch(getInvoiceData());
+    dispatch(getInvoiceData("invoiceData/"));
   }, [dispatch]);
   return (
-    <div>
-      <p>Show Invoices</p>
-      {console.log(invoiceData)}
-    </div>
+    <main>
+      {invoiceData > 0
+        ? invoiceData.map((invoice) => (
+            <div key={invoice.id}>
+              <span className="id-invoice">#{invoice.id}</span>
+              <span>{invoice.paymentDue}</span>
+              <span>{invoice.clientName}</span>
+              <span>{invoice.total}</span>
+              <span>{invoice.status}</span>
+            </div>
+          ))
+        : "NOTHING INVOICE"}
+    </main>
   );
 };
